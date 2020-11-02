@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { csv, scaleLinear, min, max } from 'd3';
 import { useData } from './helpers/useData';
+import { ChartContainer } from './components/ChartContainer.jsx'
 import { AxisTop } from './components/AxisTop.jsx'
 import { AxisLeft } from './components/AxisLeft.jsx'
 import { Planets } from './components/Planets.jsx'
@@ -35,13 +36,11 @@ const App = () => {
     .range([1, 15]);
 
   return (
-    <svg width={width} height={height}>
-      <g transform={`translate(${left + 20}, ${top})`}>
-        <AxisTop xScale={xScale} innerHeight={innerHeight} />
-        <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-        <Planets data={data} xScale={xScale} yScale={yScale} rScale={rScale} />
-      </g>
-    </svg>
+    <ChartContainer width={width} height={height} left={left} top={top} >
+      <AxisTop xScale={xScale} innerHeight={innerHeight} />
+      <AxisLeft yScale={yScale} innerWidth={innerWidth} />
+      <Planets data={data} xScale={xScale} yScale={yScale} rScale={rScale} />
+    </ChartContainer>
   )
 }
 
