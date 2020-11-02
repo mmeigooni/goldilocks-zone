@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { csv } from 'd3';
+import { csv, scaleLinear, min, max } from 'd3';
 
 const csvPath = 'https://gist.githubusercontent.com/mmeigooni/4437b0b223c9812fbab5880f18444093/raw/planets-short.csv';
 
@@ -32,8 +32,24 @@ const App = () => {
     return <h1>Loading data...</h1>
   }
 
+  const xScale = scaleLinear()
+    .domain([min(data, d => d.Hzd), max(data, d => d.Hzd)])
+    .range([0, width]);
+
+  const yScale = scaleLinear()
+    .domain([0, max(data, d => d.Mass)])
+    .range([0, height]);
+
   return (
-    <h1>Got data!</h1>
+    <svg width={width} height={height}>
+      {data.map(d => (
+        <circle
+          cx={xScale(d.Hzd)}
+          cy={yScale(d.Mass)}
+          r={d.Radius * 10}
+        />
+      ))}
+    </svg>
   )
 }
 
