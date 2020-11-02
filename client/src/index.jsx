@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { csv, scaleLinear, min, max } from 'd3';
 import { useData } from './helpers/useData';
+import { AxisTop } from './components/AxisTop.jsx'
 
 const width = 960;
 const height = 2000;
@@ -34,12 +35,7 @@ const App = () => {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${left + 20}, ${top})`}>
-        {xScale.ticks(2).map(tick => (
-          <g key={tick} transform={`translate(${xScale(tick)}, 0)`}>
-            <line y2={innerHeight} stroke="black"/>
-            <text style={{textAnchor: 'middle'}}>{tick}</text>
-          </g>
-        ))}
+        <AxisTop xScale={xScale} innerHeight={innerHeight}/>
         {yScale.ticks(6).map(tick => (
           <g key={tick} transform={`translate(0, ${yScale(tick)})`}>
             <line
