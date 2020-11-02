@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const Planets = ({data, xScale, yScale, rScale}) => (
+export const Planets = ({data, xScale, yScale, rScale, xValue, yValue, rValue, nameValue}) => (
   data.map(d => (
     <circle
-      key={d.name}
-      cx={xScale(d.Hzd)}
-      cy={yScale(d.Mass)}
-      r={rScale(d.Radius)}
+      key={nameValue(d)}
+      cx={xScale(xValue(d))}
+      cy={yScale(yValue(d))}
+      r={rScale(rValue(d))}
     />
   ))
 )

@@ -23,23 +23,37 @@ const App = () => {
   const innerHeight = height - top - bottom;
   const innerWidth = width - left - right;
 
+  const xValue = d => d.Hzd;
+  const yValue = d => d.Mass;
+  const rValue = d => d.Radius;
+  const nameValue = d => d.name;
+
   const xScale = scaleLinear()
-    .domain([min(data, d => d.Hzd), max(data, d => d.Hzd)])
+    .domain([min(data, xValue), max(data, xValue)])
     .range([0, innerWidth]);
 
   const yScale = scaleLinear()
-    .domain([0, max(data, d => d.Mass)])
+    .domain([0, max(data, yValue)])
     .range([0, innerHeight]);
 
   const rScale = scaleLinear()
-    .domain([0, max(data, d => d.Radius)])
+    .domain([0, max(data, rValue)])
     .range([1, 15]);
 
   return (
     <ChartContainer width={width} height={height} left={left} top={top} >
       <AxisTop xScale={xScale} innerHeight={innerHeight} />
       <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-      <Planets data={data} xScale={xScale} yScale={yScale} rScale={rScale} />
+      <Planets
+        data={data}
+        xScale={xScale}
+        yScale={yScale}
+        rScale={rScale}
+        xValue={xValue}
+        yValue={yValue}
+        rValue={rValue}
+        nameValue={nameValue}
+      />
     </ChartContainer>
   )
 }
