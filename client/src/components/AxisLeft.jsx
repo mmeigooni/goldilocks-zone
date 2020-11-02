@@ -5,12 +5,13 @@ export const AxisLeft = ({yScale, innerWidth}) => (
     <g key={tick} transform={`translate(0, ${yScale(tick)})`}>
       <line
         x2={innerWidth}
-        stroke="black"
+        stroke="white"
       />
       <text
         style={{textAnchor: 'end'}}
         dx="-5"
         dy="5"
+        fill='white'
       >
         {tick}
       </text>

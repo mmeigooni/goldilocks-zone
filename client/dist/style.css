@@ -1,0 +1,27 @@
+body {
+  background: black;
+  text-align: center;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+}
+
+h3 {
+  margin: 0 auto;
+  width: 50%
+}
+
+#x-axis {
+  margin: 20px 30% 0px 31%;
+}
+
+#hot {
+  float: left;
+}
+
+#just-right {
+
+}
+
+#cold {
+  float: right;
+}
