@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { csv, scaleLinear, min, max } from 'd3';
 import { useData } from './helpers/useData';
 import { AxisTop } from './components/AxisTop.jsx'
+import { AxisLeft } from './components/AxisLeft.jsx'
 
 const width = 960;
 const height = 2000;
@@ -35,22 +36,8 @@ const App = () => {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${left + 20}, ${top})`}>
-        <AxisTop xScale={xScale} innerHeight={innerHeight}/>
-        {yScale.ticks(6).map(tick => (
-          <g key={tick} transform={`translate(0, ${yScale(tick)})`}>
-            <line
-              x2={innerWidth}
-              stroke="black"
-            />
-            <text
-              style={{textAnchor: 'end'}}
-              dx="-5"
-              dy="5"
-            >
-              {tick}
-            </text>
-          </g>
-        ))}
+        <AxisTop xScale={xScale} innerHeight={innerHeight} />
+        <AxisLeft yScale={yScale} innerWidth={innerWidth} />
         {data.map(d => (
           <circle
             key={d.name}
