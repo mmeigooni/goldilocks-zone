@@ -4,6 +4,7 @@ import { csv, scaleLinear, min, max } from 'd3';
 import { useData } from './helpers/useData';
 import { AxisTop } from './components/AxisTop.jsx'
 import { AxisLeft } from './components/AxisLeft.jsx'
+import { Planets } from './components/Planets.jsx'
 
 const width = 960;
 const height = 2000;
@@ -38,14 +39,7 @@ const App = () => {
       <g transform={`translate(${left + 20}, ${top})`}>
         <AxisTop xScale={xScale} innerHeight={innerHeight} />
         <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-        {data.map(d => (
-          <circle
-            key={d.name}
-            cx={xScale(d.Hzd)}
-            cy={yScale(d.Mass)}
-            r={rScale(d.Radius)}
-          />
-        ))}
+        <Planets data={data} xScale={xScale} yScale={yScale} rScale={rScale} />
       </g>
     </svg>
   )
