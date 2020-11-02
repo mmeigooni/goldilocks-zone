@@ -1,34 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { csv, scaleLinear, min, max } from 'd3';
-
-const csvPath = 'https://gist.githubusercontent.com/mmeigooni/0b968d836c4a3b7b0d0834a765481b10/raw/planets.csv';
+import { useData } from './helpers/useData';
 
 const width = 960;
 const height = 2000;
 const margin = { top: 20, right: 20, bottom: 20, left: 20};
 
 const App = () => {
-  const [ data, setData ] = useState(null);
+  const data = useData();
   const { top, right, bottom, left } = margin;
 
-  useEffect(() => {
-    const row = d => {
-      d.Mass = +d.mass;
-      d.Radius = +d.radius;
-      d.Hzd = +d.hzd;
-      return d;
-    };
-
-    csv(csvPath, row)
-      .then(data => {
-        setData(data);
-      })
-      .catch(err => {
-        console.log('Error in parsing CSV');
-        console.log(err);
-      });
-  }, []);
 
   if (!data) {
     return <h1>Loading data...</h1>
@@ -49,7 +31,6 @@ const App = () => {
     .domain([0, max(data, d => d.Radius)])
     .range([1, 15]);
 
-  console.log(xScale.ticks(2));
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${left + 20}, ${top})`}>
