@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { csv, scaleLinear, min, max } from 'd3';
+import { csv, scaleLinear, min, max, scaleThreshold, scaleLog } from 'd3';
 import { useData } from './helpers/useData';
 import { ChartContainer } from './components/ChartContainer.jsx'
 import { AxisTop } from './components/AxisTop.jsx'
@@ -9,12 +9,17 @@ import { Planets } from './components/Planets.jsx'
 
 const width = 960;
 const height = 2000;
-const margin = { top: 20, right: 20, bottom: 20, left: 20};
+const margin = { top: 50, right: 20, bottom: 20, left: 100};
 
 const App = () => {
   const data = useData();
   const { top, right, bottom, left } = margin;
+  const [ scale, setScale ] = useState('linear')
+  let yScale;
 
+  useEffect(() => {
+    console.log('Scale is now', scale);
+ }, [scale]);
 
   if (!data) {
     return <h1>Loading data...</h1>
@@ -32,29 +37,46 @@ const App = () => {
     .domain([min(data, xValue), max(data, xValue)])
     .range([0, innerWidth]);
 
-  const yScale = scaleLinear()
-    .domain([0, max(data, yValue)])
-    .range([0, innerHeight]);
+
+
+    if (scale === 'linear') {
+      yScale = scaleLinear()
+        .domain([0, max(data, yValue)])
+        .range([0, innerHeight]);
+    } else if (scale === 'log') {
+      yScale = scaleLog()
+        .domain([.01, 10000])
+        .range([0, innerHeight]);
+    }
 
   const rScale = scaleLinear()
     .domain([0, max(data, rValue)])
-    .range([1, 15]);
+    .range([0, 20]);
+
+  const colorScale = scaleThreshold()
+    .domain([0, 2])
+    .range(["#f0563f", "#a7c039", "#0a9c9d"]);
 
   return (
-    <ChartContainer width={width} height={height} left={left} top={top} >
-      <AxisTop xScale={xScale} innerHeight={innerHeight} />
-      <AxisLeft yScale={yScale} innerWidth={innerWidth} />
-      <Planets
-        data={data}
-        xScale={xScale}
-        yScale={yScale}
-        rScale={rScale}
-        xValue={xValue}
-        yValue={yValue}
-        rValue={rValue}
-        nameValue={nameValue}
-      />
-    </ChartContainer>
+    <>
+      <button type="button" id="log" onClick={() => {setScale('log')}}>Logarithmic</button>
+      <button type="button" id="linear" onClick={() => {setScale('linear')}}>Linear</button>
+      <ChartContainer width={width} height={height} left={left} top={top} >
+        <AxisTop innerWidth={innerWidth} innerHeight={innerHeight} />
+        <AxisLeft yScale={yScale} innerWidth={innerWidth} />
+        <Planets
+          data={data}
+          xScale={xScale}
+          yScale={yScale}
+          rScale={rScale}
+          colorScale={colorScale}
+          xValue={xValue}
+          yValue={yValue}
+          rValue={rValue}
+          nameValue={nameValue}
+        />
+      </ChartContainer>
+    </>
   )
 }
 

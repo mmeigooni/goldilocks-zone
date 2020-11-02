@@ -25,3 +25,11 @@ h3 {
 #cold {
   float: right;
 }
+
+button {
+  position: absolute;
+}
+
+#linear {
+  top: 252px;
+}
