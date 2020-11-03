@@ -7,11 +7,15 @@ body {
 
 h3 {
   margin: 0 auto;
-  width: 50%
+  width: 50%;
+}
+
+img {
+  float: top;
 }
 
 #x-axis {
-  margin: 20px 30% 0px 31%;
+  margin: 20px 32% 0px 36%;
 }
 
 #hot {
@@ -31,5 +35,13 @@ button {
 }
 
 #linear {
-  top: 252px;
+  top: 400px;
+}
+
+.tooltip {
+  background: white;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  /* visibility: hidden; */
 }

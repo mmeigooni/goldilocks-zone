@@ -13,7 +13,15 @@ export const AxisLeft = ({yScale, innerWidth}) => (
         dy="5"
         fill='white'
       >
-        {tick}
+        {tick}x
+      </text>
+      <text
+        style={{textAnchor: 'end'}}
+        dx="-5"
+        dy="20"
+        fill='white'
+      >
+        Earth's mass
       </text>
     </g>
   ))

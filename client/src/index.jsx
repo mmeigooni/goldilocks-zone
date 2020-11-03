@@ -17,10 +17,6 @@ const App = () => {
   const [ scale, setScale ] = useState('linear')
   let yScale;
 
-  useEffect(() => {
-    console.log('Scale is now', scale);
- }, [scale]);
-
   if (!data) {
     return <h1>Loading data...</h1>
   }
@@ -39,18 +35,18 @@ const App = () => {
 
 
 
-    if (scale === 'linear') {
-      yScale = scaleLinear()
-        .domain([0, max(data, yValue)])
-        .range([0, innerHeight]);
-    } else if (scale === 'log') {
-      yScale = scaleLog()
-        .domain([.01, 10000])
-        .range([0, innerHeight]);
-    }
+  if (scale === 'linear') {
+    yScale = scaleLinear()
+      .domain([0, max(data, yValue)])
+      .range([0, innerHeight]);
+  } else if (scale === 'log') {
+    yScale = scaleLog()
+      .domain([.01, 10000])
+      .range([0, innerHeight]);
+  }
 
-  const rScale = scaleLinear()
-    .domain([0, max(data, rValue)])
+  const rScale = scaleLog()
+    .domain([.1, max(data, rValue)])
     .range([0, 20]);
 
   const colorScale = scaleThreshold()
