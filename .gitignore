@@ -1,2 +1,11 @@
-# Dependency directories
+# Dependencies
 node_modules/
+
+# CSVs
+*.csv
+
+# Compiled react
+bundle.js
+
+# mac files
+.DS_Store
