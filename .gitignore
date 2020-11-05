@@ -5,7 +5,7 @@ node_modules/
 *.csv
 
 # Compiled react
-bundle.js
+# bundle.js
 
 # mac files
 .DS_Store
