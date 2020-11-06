@@ -1,41 +1,8 @@
 body {
-  background: black;
   text-align: center;
+  background: black;
   color: white;
   font-family: 'Nunito', sans-serif;
-}
-
-h3 {
-  margin: 0 auto;
-  width: 50%;
-}
-
-img {
-  float: top;
-}
-
-#x-axis {
-  margin: 20px 32% 0px 36%;
-}
-
-#hot {
-  float: left;
-}
-
-#just-right {
-
-}
-
-#cold {
-  float: right;
-}
-
-button {
-  position: absolute;
-}
-
-#linear {
-  top: 400px;
 }
 
 .tooltip {
