@@ -12,3 +12,9 @@ body {
   position: absolute;
   /* visibility: hidden; */
 }
+
+.planet-name {
+  fill: white;
+  font-size: 1em;
+  visibility: hidden;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { csv, scaleLinear, min, max, scaleThreshold, scaleLog } from 'd3';
+import { csv, scaleLinear, min, max, scaleThreshold, scaleLog, selectAll } from 'd3';
 import { Grid, Button } from '@material-ui/core';
 import { useData } from './helpers/useData';
 import { ChartContainer } from './components/ChartContainer.jsx';
@@ -47,8 +47,6 @@ const App = () => {
   const xScale = scaleLinear()
     .domain([min(data, xValue), max(data, xValue)])
     .range([0, innerWidth]);
-
-
 
   if (scale === 'linear') {
     yScale = scaleLinear()
